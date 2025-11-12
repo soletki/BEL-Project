@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="bg">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Мястото на творческата личност — интерактивен сайт</title>
+		<style>
+			:root {
+				--bg: #f6f7fb;
+				--card: #ffffff;
+				--muted: #6b7280;
+				--accent: #1f7a8c;
+				--accent-2: #e6b800;
+				--glass: rgba(31, 122, 140, 0.06);
+				--maxw: 1100px;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+				background: linear-gradient(180deg, #f3f6f8, #eef2f6);
+				color: #0f1720;
+				line-height: 1.65;
+				scroll-behavior: smooth;
+			}
+			.wrap {
+				max-width: var(--maxw);
+				margin: 32px auto;
+				padding: 24px;
+			}
+
+			header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+				margin-bottom: 8px;
+			}
+			.brand {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+			}
+			.logo {
+				width: 56px;
+				height: 56px;
+				border-radius: 12px;
+				background: linear-gradient(135deg, var(--accent), var(--accent-2));
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				font-weight: 700;
+				font-size: 24px;
+				box-shadow: 0 4px 12px rgba(31, 122, 140, 0.2);
+			}
+			h1 {
+				margin: 0;
+				font-size: 22px;
+				font-weight: 700;
+				line-height: 1.3;
+			}
+
+			nav.topnav {
+				display: flex;
+				gap: 8px;
+				align-items: center;
+			}
+			.btn {
+				background: var(--card);
+				border: 1px solid rgba(15, 23, 32, 0.08);
+				padding: 10px 16px;
+				border-radius: 8px;
+				font-weight: 600;
+				font-size: 14px;
+				color: var(--accent);
+				text-decoration: none;
+				transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+				cursor: pointer;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+			}
+			.btn:hover {
+				background: var(--accent);
+				color: white;
+				transform: translateY(-1px);
+				box-shadow: 0 4px 12px rgba(31, 122, 140, 0.15);
+			}
+			.btn:active {
+				transform: translateY(0);
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: 1fr 340px;
+				gap: 24px;
+				margin-top: 28px;
+			}
+
+			main.article {
+				background: var(--card);
+				border-radius: 16px;
+				padding: 32px;
+				box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
+			}
+			.hero {
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+			}
+			.meta {
+				color: var(--muted);
+				font-size: 13px;
+			}
+
+			.section {
+				margin-top: 32px;
+				padding-top: 16px;
+				transition: all 0.3s ease;
+				border-radius: 8px;
+			}
+			.section.highlight {
+				animation: highlightPulse 1s ease-out;
+			}
+			@keyframes highlightPulse {
+				0% {
+					background: transparent;
+					transform: scale(1);
+				}
+				50% {
+					background: linear-gradient(90deg, transparent, rgba(31, 122, 140, 0.06), transparent);
+					transform: scale(1.005);
+				}
+				100% {
+					background: transparent;
+					transform: scale(1);
+				}
+			}
+			.section h2 {
+				margin: 0 0 16px 0;
+				font-size: 18px;
+				font-weight: 700;
+				color: var(--accent);
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+			.section h2::before {
+				content: '';
+				width: 4px;
+				height: 24px;
+				background: linear-gradient(180deg, var(--accent), var(--accent-2));
+				border-radius: 2px;
+			}
+			.columns {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 14px;
+			}
+			.card {
+				background: var(--glass);
+				padding: 16px;
+				border-radius: 10px;
+				border: 1px solid rgba(15, 23, 32, 0.04);
+				transition: all 0.2s ease;
+			}
+			.card:hover {
+				background: rgba(31, 122, 140, 0.08);
+				border-color: rgba(31, 122, 140, 0.15);
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(16, 24, 40, 0.06);
+			}
+			.card strong {
+				display: block;
+				margin-bottom: 6px;
+				color: var(--accent);
+				font-size: 15px;
+			}
+
+			aside.sidebar {
+				position: relative;
+			}
+			.toc {
+				background: var(--card);
+				padding: 20px;
+				border-radius: 14px;
+				box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04), 0 6px 18px rgba(16, 24, 40, 0.04);
+				position: sticky;
+				top: 24px;
+			}
+			.toc h3 {
+				margin: 0 0 14px 0;
+				font-size: 16px;
+				color: var(--accent);
+				font-weight: 700;
+			}
+			.toc ul {
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			.toc li {
+				margin: 10px 0;
+			}
+			.toc a {
+				color: #374151;
+				text-decoration: none;
+				font-weight: 500;
+				font-size: 14px;
+				transition: all 0.2s ease;
+				display: inline-block;
+				padding: 2px 0;
+				position: relative;
+			}
+			.toc a::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 0;
+				height: 2px;
+				background: var(--accent);
+				transition: width 0.2s ease;
+			}
+			.toc a:hover {
+				color: var(--accent);
+				transform: translateX(4px);
+			}
+			.toc a:hover::before {
+				width: 100%;
+			}
+
+			.timeline {
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+			}
+			.event {
+				display: flex;
+				gap: 14px;
+				align-items: flex-start;
+				transition: all 0.2s ease;
+			}
+			.event:hover {
+				transform: translateX(4px);
+			}
+			.dot {
+				width: 12px;
+				height: 12px;
+				border-radius: 50%;
+				background: linear-gradient(135deg, var(--accent), var(--accent-2));
+				margin-top: 8px;
+				flex-shrink: 0;
+				box-shadow: 0 0 0 4px rgba(31, 122, 140, 0.1);
+				transition: all 0.2s ease;
+			}
+			.event:hover .dot {
+				transform: scale(1.2);
+				box-shadow: 0 0 0 6px rgba(31, 122, 140, 0.15);
+			}
+			.event .content {
+				background: #fff;
+				padding: 14px 16px;
+				border-radius: 10px;
+				box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+				border: 1px solid rgba(15, 23, 32, 0.04);
+				flex: 1;
+				transition: all 0.2s ease;
+			}
+			.event:hover .content {
+				box-shadow: 0 4px 16px rgba(16, 24, 40, 0.08);
+				border-color: rgba(31, 122, 140, 0.15);
+			}
+			.event .content h4 {
+				margin: 0 0 8px 0;
+				font-size: 15px;
+				color: var(--accent);
+			}
+			.event .content p {
+				margin: 0;
+				color: var(--muted);
+				font-size: 14px;
+				line-height: 1.6;
+			}
+
+			.quote {
+				font-style: italic;
+				padding: 18px 20px;
+				border-left: 5px solid var(--accent);
+				background: linear-gradient(90deg, rgba(31, 122, 140, 0.04), transparent);
+				border-radius: 8px;
+				font-size: 15px;
+				line-height: 1.7;
+				box-shadow: 0 2px 8px rgba(16, 24, 40, 0.03);
+			}
+
+			footer {
+				margin-top: 32px;
+				padding-top: 24px;
+				border-top: 1px solid rgba(15, 23, 32, 0.06);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 12px;
+			}
+			.small {
+				color: var(--muted);
+				font-size: 13px;
+			}
+
+			/* Scroll to top button */
+			.scroll-top {
+				position: fixed;
+				bottom: 32px;
+				right: 32px;
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				background: var(--accent);
+				color: white;
+				border: none;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 4px 16px rgba(31, 122, 140, 0.3);
+				opacity: 0;
+				transform: translateY(20px);
+				transition: all 0.3s ease;
+				z-index: 100;
+				font-size: 20px;
+			}
+			.scroll-top.visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			.scroll-top:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 6px 20px rgba(31, 122, 140, 0.4);
+			}
+
+			/* Подобрен responsive */
+			@media (max-width: 980px) {
+				.grid {
+					grid-template-columns: 1fr;
+				}
+				.sidebar {
+					order: 2;
+				}
+				.toc {
+					position: static;
+					margin-top: 20px;
+				}
+				header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+				nav.topnav {
+					width: 100%;
+					justify-content: space-between;
+				}
+				.columns {
+					grid-template-columns: 1fr;
+				}
+				main.article {
+					padding: 24px 20px;
+				}
+			}
+
+			/* Print стил */
+			@media print {
+				body {
+					background: white;
+				}
+				.wrap {
+					padding: 0;
+				}
+				nav.topnav,
+				.toc,
+				.btn,
+				.scroll-top {
+					display: none;
+				}
+				.section {
+					page-break-inside: avoid;
+				}
+			}
+
+			/* Loader за плавно зареждане */
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+			.section, .card, .event {
+				animation: fadeIn 0.5s ease backwards;
+			}
+			.section:nth-child(1) { animation-delay: 0.05s; }
+			.section:nth-child(2) { animation-delay: 0.1s; }
+			.section:nth-child(3) { animation-delay: 0.15s; }
+			.section:nth-child(4) { animation-delay: 0.2s; }
+			.section:nth-child(5) { animation-delay: 0.25s; }
+			.section:nth-child(6) { animation-delay: 0.3s; }
+		</style>
+	</head>
+	<body>
+		<div class="wrap" role="main">
+			<header>
+				<div class="brand">
+					<div class="logo"></div>
+					<div>
+						<h1>Мястото на творческата личност в обществото</h1>
+					</div>
+				</div>
+				<nav class="topnav" aria-label="Основна навигация">
+					<a class="btn" href="#read">📖 Прочети</a>
+					<a class="btn" href="#timeline">⏳ Хронология</a>
+					<a class="btn" href="#eras">🌍 Сравнение</a>
+				</nav>
+			</header>
+
+			<div class="grid">
+				<main class="article" id="read">
+					<section class="hero">
+						<h2>Увод</h2>
+						<p>
+							Творческата личност винаги е заемала особено място в
+							човешката история — едновременно възвишено и
+							уязвимо. Тя е посредник между въображението и
+							реалността, а отношението към нея отразява
+							културните и идеологическите ценности на обществото.
+						</p>
+
+						<div class="quote">
+							Теза: Мястото на творческата личност е белязано от
+							двойственост — тя движи духа на обществото, но често
+							живее в несигурност и зависимост.
+						</div>
+					</section>
+
+					<section class="section" aria-labelledby="history">
+						<h2 id="history">Исторически преглед</h2>
+						<div class="columns">
+							<div>
+								<div class="card">
+									<strong>Античност</strong>
+									<p class="small">
+										Изкуството е обществено и религиозно;
+										творецът често е занаятчия, с изключения
+										в Китай, където "литератите" имат елитен
+										статус.
+									</p>
+								</div>
+
+								<div class="card" style="margin-top: 10px">
+									<strong>Средновековие</strong>
+									<p class="small">
+										В Европа Църквата диктува темите; в
+										ислямския свят — поети и учени се ценят
+										високо.
+									</p>
+								</div>
+
+								<div class="card" style="margin-top: 10px">
+									<strong>Ренесанс</strong>
+									<p class="small">
+										Възраждане на индивидуалността и идеята
+										за гения; икономическата зависимост от
+										покровители остава.
+									</p>
+								</div>
+							</div>
+
+							<div>
+								<div class="card">
+									<strong>Индустриална епоха</strong>
+									<p class="small">
+										Физическият труд става икономически
+										важен; интелектът и техническите умения
+										нарастват като престиж.
+									</p>
+								</div>
+
+								<div class="card" style="margin-top: 10px">
+									<strong>Социализъм</strong>
+									<p class="small">
+										Работникът е идеализиран; творецът
+										подчинен на идеологията.
+									</p>
+								</div>
+
+								<div class="card" style="margin-top: 10px">
+									<strong>Съвременност</strong>
+									<p class="small">
+										Културните индустрии са значими, но
+										нестабилността на творците остава —
+										многодетна заетост и пазарна зависимост.
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<section class="section" id="compare">
+						<h2>Сравнение: физически vs интелектуален труд</h2>
+						<p>
+							В аграрните общества физическата работа има висока
+							стойност, докато в бюрократичните и
+							постиндустриалните — интелектуалният труд добива
+							привилегии; социалистическите идеологии възхваляват
+							работника като идеал.
+						</p>
+					</section>
+
+					<section class="section" id="challenges">
+						<h2>Предизвикателства и награди</h2>
+						<div class="columns">
+							<div>
+								<div class="card">
+									<strong>Предизвикателства</strong>
+									<p class="small">
+										Цензура, икономическа несигурност,
+										социално недоразбиране и културно
+										обезценяване.
+									</p>
+								</div>
+								<div class="card" style="margin-top: 10px">
+									<strong>Материални награди</strong>
+									<p class="small">
+										Покровителство, грантове, държавна
+										подкрепа, макар често недостатъчни.
+									</p>
+								</div>
+							</div>
+							<div>
+								<div class="card">
+									<strong>Социални и морални награди</strong>
+									<p class="small">
+										Почести, статут и вътрешно
+										удовлетворение от влиянието върху
+										обществото.
+									</p>
+								</div>
+								<div class="card" style="margin-top: 10px">
+									<strong>Дългосрочно признание</strong>
+									<p class="small">
+										Много творци са признати постхумно;
+										истинската награда често е духовна и
+										културна.
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<section class="section" id="eras">
+						<h2>
+							Историческо сравнение на физическия и
+							интелектуалния труд
+						</h2>
+
+						<div class="timeline">
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>🏺 Античност</h4>
+									<p>
+										<strong>Древна Гърция</strong> – ценят
+										интелектуалния и артистичния труд
+										(поезия, музика, философия), но творецът
+										е възприеман като занаятчия, а не като
+										гений.<br />
+										<strong>Древен Рим</strong> –
+										физическият труд е за робите, докато
+										интелектуалният (оратори, философи,
+										инженери) носи престиж сред елита.<br />
+										<strong>Китай (Хан и след това)</strong>
+										– „литератите" въплъщават най-висшата
+										добродетел; физическият труд е за
+										по-ниските класи.<br />
+										<strong>Индия</strong> – духовният труд
+										(поети, жреци, музиканти) е свещен;
+										физическият е низш според кастовата
+										система.<br />
+										<strong>Близък изток</strong> – творецът
+										има религиозен статут; духовният труд
+										служи на властта.<br />
+										<strong>Африка и Америка</strong> –
+										физическият и творческият труд се сливат
+										в ритуала; няма ясно разграничение между
+										тях.
+									</p>
+								</div>
+							</div>
+
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>⛪ Средновековие (V–XV в.)</h4>
+									<p>
+										<strong>Европа</strong> – физическият
+										труд е низш, интелектуалният е подчинен
+										на религията.<br />
+										<strong>Ислямски свят</strong> – поети,
+										учени и калиграфи се ценят високо като
+										израз на вярата.<br />
+										<strong>Китай (Сун)</strong> –
+										„литератите" са елитът на знанието.<br />
+										<strong>Япония</strong> – съчетава
+										физическа и духовна дисциплина;
+										образованието и поезията са благородни.
+									</p>
+								</div>
+							</div>
+
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>🎨 Ренесанс (XV–XVII в.)</h4>
+									<p>
+										<strong>Западна Европа</strong> – възход
+										на твореца-гений, но зависим от
+										покровители.<br />
+										<strong>Българско Възраждане</strong> –
+										творческият труд добива морален и
+										национален смисъл; образованието става
+										духовна мисия.
+									</p>
+								</div>
+							</div>
+
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>⚙️ Индустриална епоха (XVIII–XIX в.)</h4>
+									<p>
+										<strong>Западна Европа и САЩ</strong> –
+										физическият труд става икономически
+										двигател, но интелектуалният носи
+										престиж.<br />
+										<strong>Русия</strong> – възхвала на
+										народния труд, интелигенцията придобива
+										културно влияние.<br />
+										<strong
+											>Османска империя и Балкани</strong
+										>
+										– физическият труд е основен поминък,
+										интелектуалният – прерогатива на
+										духовния елит.
+									</p>
+								</div>
+							</div>
+
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>🧠 Модерна и съвременна епоха (XX–XXI в.)</h4>
+									<p>
+										<strong
+											>Западна Европа и
+											Скандинавия</strong
+										>
+										– държавна подкрепа за интелектуален и
+										творчески труд.<br />
+										<strong>САЩ</strong> – висока стойност
+										на иновациите; физическият труд остава
+										по-ниско оценен.<br />
+										<strong
+											>СССР и социалистически
+											държави</strong
+										>
+										– идеализация на физическия труд;
+										интелектуалците подчинени на
+										партията.<br />
+										<strong>Китай</strong> – от култ към
+										физическия труд през XX в. до водеща
+										роля на интелектуалния днес.<br />
+										<strong>Япония и Германия</strong> –
+										уважение към дисциплината във всеки
+										труд.<br />
+										<strong>България (днес)</strong> –
+										образованието се цени, но доходността на
+										физическите професии често е по-висока.
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<section class="section" id="conclude">
+						<h2>Заключение</h2>
+						<p>
+							Творецът е едновременно част от обществото и
+							неговата съвест: движи културния живот, поставя
+							неудобни въпроси и напомня за духовните измерения на
+							човешкото. Неговото място зависи от исторически и
+							социални контексти, но значението му остава
+							непреходно.
+						</p>
+					</section>
+				</main>
+
+				<aside class="sidebar">
+					<div class="toc" role="navigation" aria-label="Съдържание">
+						<h3>📑 Навигация</h3>
+						<ul>
+							<li><a href="#read">Увод и теза</a></li>
+							<li><a href="#history">Исторически преглед</a></li>
+							<li><a href="#compare">Сравнение</a></li>
+							<li><a href="#challenges">Предизвикателства</a></li>
+							<li><a href="#eras">Детайлна хронология</a></li>
+							<li><a href="#conclude">Заключение</a></li>
+						</ul>
+
+						<div style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
+							<a class="btn" href="#conclude" style="flex: 1;">📝 Резюме</a>
+							<a class="btn" href="#eras" style="flex: 1;">🕰 История</a>
+						</div>
+					</div>
+
+					<div style="height: 20px"></div>
+
+					<div class="toc" id="timeline">
+						<h3>⏳ Кратка хронология</h3>
+						<div class="timeline">
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>Античност</h4>
+									<p>
+										Изкуството в общността; различни статуси
+										на твореца по региони.
+									</p>
+								</div>
+							</div>
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>Средновековие</h4>
+									<p>
+										Църковен контрол в Европа; исламски и
+										източни традиции — високо уважение към
+										учените.
+									</p>
+								</div>
+							</div>
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>Ренесанс</h4>
+									<p>
+										Идея за гения и индивидуалността;
+										икономическа зависимост от покровители.
+									</p>
+								</div>
+							</div>
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>Индустриална епоха</h4>
+									<p>
+										Расте значението на физическия и
+										техническия труд; променящи се нагласи.
+									</p>
+								</div>
+							</div>
+							<div class="event">
+								<div class="dot"></div>
+								<div class="content">
+									<h4>Съвременност</h4>
+									<p>
+										Културни индустрии и дигитални платформи
+										— повече възможности, повече
+										несигурност.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</aside>
+			</div>
+
+			<footer>
+				<div class="small">© TUES - Stoyan Ivanov 12B</div>
+				<div class="small">
+					Разработено за представяне на тема „Мястото на творческата
+					личност в обществото"
+				</div>
+			</footer>
+		</div>
+
+		<button class="scroll-top" id="scrollTop" aria-label="Към началото">↑</button>
+
+		<script>
+			// Highlight анимация при кликване
+			document.addEventListener('DOMContentLoaded', function() {
+				const links = document.querySelectorAll('a[href^="#"]');
+				const scrollTop = document.getElementById('scrollTop');
+				
+				// Навигация с highlight
+				links.forEach(link => {
+					link.addEventListener('click', function(e) {
+						const targetId = this.getAttribute('href').substring(1);
+						const targetElement = document.getElementById(targetId);
+						
+						if (targetElement) {
+							const previousHighlight = document.querySelector('.highlight');
+							if (previousHighlight) {
+								previousHighlight.classList.remove('highlight');
+							}
+							
+							setTimeout(() => {
+								if (targetElement.classList.contains('section') || targetElement.classList.contains('toc')) {
+									targetElement.classList.add('highlight');
+									setTimeout(() => {
+										targetElement.classList.remove('highlight');
+									}, 1000);
+								}
+							}, 300);
+						}
+					});
+				});
+
+				// Scroll to top бутон
+				window.addEventListener('scroll', () => {
+					if (window.scrollY > 300) {
+						scrollTop.classList.add('visible');
+					} else {
+						scrollTop.classList.remove('visible');
+					}
+				});
+
+				scrollTop.addEventListener('click', () => {
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+				});
+
+				// Keyboard navigation
+				document.addEventListener('keydown', (e) => {
+					if (e.key === 'Home' && e.ctrlKey) {
+						e.preventDefault();
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
